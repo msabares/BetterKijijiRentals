@@ -8,6 +8,13 @@ import 'buefy/dist/buefy.css'
 Vue.use(Buefy)
 //#endregion
 
+//#region Axios
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
+//#endregion
+
 Vue.config.productionTip = false
 
 new Vue({

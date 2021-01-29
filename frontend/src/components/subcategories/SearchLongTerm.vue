@@ -18,16 +18,15 @@
               >Price
             </label>
             <div class="is-flex is-justify-content-space-between">
-              <p class="is-size-7">${{ longTermSearch.price[0] }}</p>
+              <p class="is-size-7">${{ filter.price[0] }}</p>
               <p class="is-size-7">
-                ${{ longTermSearch.price[1]
-                }}{{ longTermSearch.price[1] == 5000 ? "+" : "" }}
+                ${{ filter.price[1] }}{{ filter.price[1] == 5000 ? "+" : "" }}
               </p>
             </div>
           </template>
           <b-slider
             size="is-small"
-            v-model="longTermSearch.price"
+            v-model="filter.price"
             :min="0"
             :max="5000"
             :step="50"
@@ -45,12 +44,7 @@
               <b-icon icon="home" pack="fas" size="is-small"></b-icon> Unit Type
             </label>
           </template>
-          <b-select
-            rounded
-            size="is-small"
-            expanded
-            v-model="longTermSearch.unitType"
-          >
+          <b-select rounded size="is-small" expanded v-model="filter.unittype">
             <option
               v-for="option in unitTypeOptions"
               :key="option.value"
@@ -76,7 +70,7 @@
                 rounded
                 size="is-small"
                 expanded
-                v-model="longTermSearch.bedrooms"
+                v-model="filter.numberbedrooms"
               >
                 <option
                   v-for="option in bedroomOptions"
@@ -100,7 +94,7 @@
                 rounded
                 size="is-small"
                 expanded
-                v-model="longTermSearch.bathrooms"
+                v-model="filter.numberbathrooms"
               >
                 <option
                   v-for="option in bathroomOptions"
@@ -126,7 +120,7 @@
           <b-radio-button
             expanded
             size="is-small"
-            v-model="longTermSearch.parking"
+            v-model="filter.parking"
             v-for="option in parkingOptions"
             :key="option.value"
             :native-value="option.value"
@@ -149,7 +143,7 @@
             v-for="option in petFriendlyOptions"
             :key="option.value"
             :native-value="option.value"
-            v-model="longTermSearch.petFriendly"
+            v-model="filter.petfriendly"
             size="is-small"
           >
             {{ option.text }}
@@ -170,7 +164,7 @@
             v-for="option in forRentByOption"
             :key="option.value"
             :native-value="option.value"
-            v-model="longTermSearch.forRentBy"
+            v-model="filter.forrentby"
             size="is-small"
           >
             {{ option.text }}
@@ -191,7 +185,7 @@
             v-for="option in agreementTypeOptions"
             :key="option.value"
             :native-value="option.value"
-            v-model="longTermSearch.agreementType"
+            v-model="filter.agreementtype"
             size="is-small"
           >
             {{ option.text }}
@@ -227,7 +221,7 @@
                   v-for="option in genericOptions"
                   :key="option.value"
                   :native-value="option.value"
-                  v-model="longTermSearch.hydro"
+                  v-model="filter.hydro"
                   size="is-small"
                 >
                   {{ option.text }}
@@ -253,7 +247,7 @@
                   v-for="option in genericOptions"
                   :key="option.value"
                   :native-value="option.value"
-                  v-model="longTermSearch.heat"
+                  v-model="filter.heat"
                   size="is-small"
                 >
                   {{ option.text }}
@@ -275,7 +269,7 @@
                   v-for="option in genericOptions"
                   :key="option.value"
                   :native-value="option.value"
-                  v-model="longTermSearch.water"
+                  v-model="filter.water"
                   size="is-small"
                 >
                   {{ option.text }}
@@ -307,16 +301,16 @@
                 <b-icon icon="ruler" pack="fas" size="is-small"></b-icon> Size
               </label>
               <div class="is-flex is-justify-content-space-between">
-                <p class="is-size-7">{{ longTermSearch.size[0] }} sqft</p>
+                <p class="is-size-7">{{ filter.areainfeet[0] }} sqft</p>
                 <p class="is-size-7">
-                  {{ longTermSearch.size[1]
-                  }}{{ longTermSearch.size[1] == 3000 ? "+ sqft" : " sqft" }}
+                  {{ filter.areainfeet[1]
+                  }}{{ filter.areainfeet[1] == 3000 ? "+ sqft" : " sqft" }}
                 </p>
               </div>
             </template>
             <b-slider
               size="is-small"
-              v-model="longTermSearch.size"
+              v-model="filter.areainfeet"
               :min="0"
               :max="3000"
               :step="25"
@@ -340,7 +334,7 @@
               v-for="option in genericOptions"
               :key="option.value"
               :native-value="option.value"
-              v-model="longTermSearch.furnished"
+              v-model="filter.furnished"
               size="is-small"
             >
               {{ option.text }}
@@ -361,7 +355,7 @@
               v-for="option in genericOptions"
               :key="option.value"
               :native-value="option.value"
-              v-model="longTermSearch.airconditioning"
+              v-model="filter.airconditioning"
               size="is-small"
             >
               {{ option.text }}
@@ -396,7 +390,7 @@
                   v-for="option in genericOptions"
                   :key="option.value"
                   :native-value="option.value"
-                  v-model="longTermSearch.laundryInUnit"
+                  v-model="filter.laundryununit"
                   size="is-small"
                 >
                   {{ option.text }}
@@ -416,7 +410,7 @@
                   v-for="option in genericOptions"
                   :key="option.value"
                   :native-value="option.value"
-                  v-model="longTermSearch.laundryInBuilding"
+                  v-model="filter.laundryinbuilding"
                   size="is-small"
                 >
                   {{ option.text }}
@@ -436,7 +430,7 @@
                   v-for="option in genericOptions"
                   :key="option.value"
                   :native-value="option.value"
-                  v-model="longTermSearch.dishWasher"
+                  v-model="filter.dishwasher"
                   size="is-small"
                 >
                   {{ option.text }}
@@ -460,7 +454,7 @@
                   v-for="option in genericOptions"
                   :key="option.value"
                   :native-value="option.value"
-                  v-model="longTermSearch.fridgeFreezer"
+                  v-model="filter.fridgefreezer"
                   size="is-small"
                 >
                   {{ option.text }}
@@ -498,7 +492,7 @@
                     v-for="option in genericOptions"
                     :key="option.value"
                     :native-value="option.value"
-                    v-model="longTermSearch.yard"
+                    v-model="filter.yard"
                     size="is-small"
                   >
                     {{ option.text }}
@@ -519,7 +513,7 @@
                     v-for="option in genericOptions"
                     :key="option.value"
                     :native-value="option.value"
-                    v-model="longTermSearch.balcony"
+                    v-model="filter.balcony"
                     size="is-small"
                   >
                     {{ option.text }}
@@ -559,7 +553,7 @@
               v-for="option in genericOptions"
               :key="option.value"
               :native-value="option.value"
-              v-model="longTermSearch.elevatorInBuilding"
+              v-model="filter.elevatorinbuilding"
               size="is-small"
             >
               {{ option.text }}
@@ -579,7 +573,7 @@
               v-for="option in genericOptions"
               :key="option.value"
               :native-value="option.value"
-              v-model="longTermSearch.gym"
+              v-model="filter.gym"
               size="is-small"
             >
               {{ option.text }}
@@ -599,7 +593,7 @@
               v-for="option in genericOptions"
               :key="option.value"
               :native-value="option.value"
-              v-model="longTermSearch.pool"
+              v-model="filter.pool"
               size="is-small"
             >
               {{ option.text }}
@@ -623,7 +617,7 @@
               v-for="option in genericOptions"
               :key="option.value"
               :native-value="option.value"
-              v-model="longTermSearch.security"
+              v-model="filter.security"
               size="is-small"
             >
               {{ option.text }}
@@ -643,7 +637,7 @@
               v-for="option in genericOptions"
               :key="option.value"
               :native-value="option.value"
-              v-model="longTermSearch.security"
+              v-model="filter.security"
               size="is-small"
             >
               {{ option.text }}
@@ -663,7 +657,7 @@
               v-for="option in genericOptions"
               :key="option.value"
               :native-value="option.value"
-              v-model="longTermSearch.bicycleParking"
+              v-model="filter.bicycleparking"
               size="is-small"
             >
               {{ option.text }}
@@ -683,7 +677,7 @@
               v-for="option in genericOptions"
               :key="option.value"
               :native-value="option.value"
-              v-model="longTermSearch.storageSpace"
+              v-model="filter.storagespace"
               size="is-small"
             >
               {{ option.text }}
@@ -703,7 +697,12 @@
           expanded
           >Reset</b-button
         >
-        <b-button class="is-small" type="is-primary" rounded expanded
+        <b-button
+          class="is-small"
+          type="is-primary"
+          rounded
+          expanded
+          @click="applyFilter"
           >Apply Filters</b-button
         >
       </footer>
@@ -713,39 +712,13 @@
 </template>
 
 <script lang="ts">
+import store from "../../store";
+import LongTermFilter from "../../models/LongTermFilter";
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class HelloWorld extends Vue {
-  longTermSearch = {
-    price: [0, 5000],
-    forRentBy: null,
-    unitType: null,
-    bedrooms: null,
-    bathrooms: null,
-    agreementType: null,
-    petFriendly: null,
-    hydro: null,
-    heat: null,
-    water: null,
-    parking: null,
-    furnished: null,
-    size: [0, 3000],
-    laundryInUnit: null,
-    laundryInBuilding: null,
-    dishWasher: null,
-    fridgeFreezer: null,
-    airconditioning: null,
-    yard: null,
-    balcony: null,
-    elevatorInBuilding: null,
-    gym: null,
-    pool: null,
-    concierge: null,
-    security: null,
-    bicycleParking: null,
-    storageSpace: null,
-  };
+  filter: LongTermFilter = new LongTermFilter();
 
   forRentByOption = [
     { text: "Any", value: null },
@@ -763,6 +736,7 @@ export default class HelloWorld extends Vue {
   ];
   bedroomOptions = [
     { text: "Any", value: null },
+    { text: "Batchelor/Studio", value: 0 },
     { text: "1", value: 1 },
     { text: "1 + Den", value: 1.5 },
     { text: "2", value: 2 },
@@ -789,13 +763,13 @@ export default class HelloWorld extends Vue {
   ];
   agreementTypeOptions = [
     { text: "Any", value: null },
-    { text: "Month-to-month", value: "monthtomonth" },
-    { text: "1 Year", value: "1year" },
+    { text: "Month-to-month", value: "month-to-month" },
+    { text: "1 Year", value: "one-year" },
   ];
   petFriendlyOptions = [
     { text: "Any", value: null },
-    { text: "Yes", value: "yes" },
-    { text: "No", value: "no" },
+    { text: "Yes", value: "1" },
+    { text: "No", value: "0" },
     { text: "Limited", value: "limited" },
   ];
   parkingOptions = [
@@ -807,9 +781,28 @@ export default class HelloWorld extends Vue {
   ];
   genericOptions = [
     { text: "Any", value: null },
-    { text: "Yes", value: true },
-    { text: "No", value: false },
+    { text: "Yes", value: 1 },
+    { text: "No", value: 0 },
   ];
+
+  applyFilter() {
+    const tempData = {
+      searchIds: {
+        location: {
+          province: "SASKATCHEWAN",
+          area: "",
+          city: "SASKATOON",
+        },
+        category: "LONG_TERM_RENTALS",
+      },
+      options: {
+        minResults: 20,
+      },
+      params: this.filter,
+    };
+    console.log(tempData);
+    this.$store.dispatch("getListings", tempData);
+  }
 }
 </script>
 

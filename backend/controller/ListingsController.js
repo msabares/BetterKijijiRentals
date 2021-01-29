@@ -14,12 +14,29 @@ exports.getListings = async (request, response) => {
   let { searchIds: {location, category}, options, params } = request.body
 
   //Setup locationId and categoryId based on searchIds
-  params.locationId = (location.area === "") ? locations[location.province][location.city] : kijiji.locations[location.province][location.area][location.city]
-  params.categoryId = categories.REAL_ESTATE.FOR_RENT[category]
+  let tempParams = {}
 
+  tempParams.locationId = (location.area === "") ? locations[location.province][location.city] : kijiji.locations[location.province][location.area][location.city]
+  tempParams.categoryId = categories.REAL_ESTATE.FOR_RENT[category]
+  tempParams.searchOptionsExactMatch = true
+  tempParams.sortType = "DATE_DESCENDING"
+
+  Object.entries(params).map(([key, value]) => {
+    if(value !== null && key !== "price") {
+        if(key === "areainfeet") {
+            tempParams["attr[" + key + "]"] = value[0] + "," +value[1]
+        } else {
+            tempParams["attr[" + key + "]"] = value
+        }
+    }
+  })
+
+  
   console.log()
-  console.log(request.body)
-  search(params, options)
+  console.log(tempParams)
+
+  //console.log(request.body)
+  search(tempParams, options)
     .then( ads => {
         console.log("Amount of Ads: " + ads.length)
         console.log()
@@ -31,7 +48,7 @@ exports.getListings = async (request, response) => {
         console.log(error)
     })
 
-  response.send('Hello World')
+  response.send(request.body)
 }
 
 exports.validate = (method) => {

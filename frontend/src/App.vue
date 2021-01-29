@@ -1,7 +1,7 @@
 <template>
-  <section class="section" id="app">
+  <div id="app">
     <search-long-term></search-long-term>
-  </section>
+  </div>
 </template>
 
 <script lang="ts">

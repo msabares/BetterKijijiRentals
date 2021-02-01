@@ -22,33 +22,30 @@ exports.getListings = async (request, response) => {
   tempParams.sortType = "DATE_DESCENDING"
 
   Object.entries(params).map(([key, value]) => {
-    if(value !== null && key !== "price") {
+    if(value !== null) {
         if(key === "areainfeet") {
             tempParams["attr[" + key + "]"] = value[0] + "," +value[1]
-        } else {
+        } else if (key === "price") {
+            tempParams["minPrice"] = value[0]
+            tempParams["maxPrice"] = value[1]
+        }
+        else {
             tempParams["attr[" + key + "]"] = value
         }
     }
   })
 
   
-  console.log()
-  console.log(tempParams)
-
-  //console.log(request.body)
   search(tempParams, options)
     .then( ads => {
         console.log("Amount of Ads: " + ads.length)
-        console.log()
-        for (let i = 0; i < ads.length; ++i) {
-            console.log(ads[i].title);
-        }
+        response.send(ads)
     })
     .catch(error => {
         console.log(error)
+        response.send(error)
     })
 
-  response.send(request.body)
 }
 
 exports.validate = (method) => {

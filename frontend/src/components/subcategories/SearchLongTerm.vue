@@ -29,7 +29,7 @@
             v-model="filter.price"
             :min="0"
             :max="5000"
-            :step="50"
+            :step="25"
             :tooltip="false"
             rounded
           >
@@ -282,7 +282,7 @@
         <!--#endregion-->
 
         <!--#region The Unit-->
-        <b-collapse :open="false" animation="slide" aria-id="theUnit">
+        <b-collapse animation="slide" aria-id="theUnit">
           <template #trigger="props">
             <b-button
               expanded
@@ -527,7 +527,7 @@
         </b-collapse>
         <!--#endregion-->
 
-        <b-collapse :open="false" animation="slide" aria-id="amenities">
+        <b-collapse animation="slide" aria-id="amenities">
           <template #trigger="props">
             <b-button
               expanded

@@ -16,11 +16,14 @@ export default new Vuex.Store({
   actions: {
     async getListings({commit}, data) {
       return axios.post('http://localhost:3000/api/listings', data).then(response => {
-        //commit('SET_LISTINGD', response.data)
+        commit('SET_LISTINGS', response.data)
         console.log(response.data)
       })
     }
   },
   modules: {
+  },
+  getters: {
+    getListings: state => state.listings
   }
 })

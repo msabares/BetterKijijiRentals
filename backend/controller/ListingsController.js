@@ -20,6 +20,7 @@ exports.getListings = async (request, response) => {
   tempParams.categoryId = categories.REAL_ESTATE.FOR_RENT[category]
   tempParams.searchOptionsExactMatch = true
   tempParams.sortType = "DATE_DESCENDING"
+  tempParams.adType = "OFFERED"
 
   Object.entries(params).map(([key, value]) => {
     if(value !== null) {
@@ -38,7 +39,6 @@ exports.getListings = async (request, response) => {
   
   search(tempParams, options)
     .then( ads => {
-        console.log("Amount of Ads: " + ads.length)
         response.send(ads)
     })
     .catch(error => {

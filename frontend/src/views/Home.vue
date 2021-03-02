@@ -1,18 +1,19 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <search-long-term></search-long-term>
+    <listings></listings>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Listings from "../components/Listings.vue";
+import SearchLongTerm from "../components/subcategories/SearchLongTerm.vue";
 
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
-  }
-}
+    SearchLongTerm,
+    Listings,
+  },
+};
 </script>
